@@ -1,0 +1,63 @@
+version: "2.0"
+services:
+
+  mysqldb:
+    image: mysql
+    container_name: mysqldb
+    ports:
+      - "3307:3306"
+    restart: always
+    networks: 
+      - springboot-mysql-net 
+    environment:
+      - MYSQL_ROOT_PASSWORD=sajal123
+      - MYSQL_DATABASE=task
+      - MYSQL_USER=sajal
+      - MYSQL_PASSWORD=sajal123
+    volumes:
+      - mysql_data_volume:/var/lib/mysql
+    networks:
+    	my-net:
+    	  ipv4_address: 172.18.0.1
+    	    
+  react:
+    image: sajalgupta545/mytaskguru-frontend:latest
+    container_name: client
+    ports:
+      - "3000:3000"
+    networks:
+    	my-net:
+    	  ipv4_address: 172.18.0.3
+    depends_on:
+      - springboot-restful-webservices
+  springboot-restful-webservices:
+    image: sajalgupta545/mytaskguru-backend:latest
+    container_name: springboot-restful-webservices
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    restart: always
+    environment:
+      spring_datasource_url: "jdbc:mysql://mysqldb:3306/task?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true"
+      spring_datasource_username: sajal
+      spring_datasource_password: sajal123
+    depends_on:
+      - mysqldb
+    networks:
+    	my-net:
+    	  ipv4_address: 172.18.0.2 
+    restart: on-failure
+  
+
+
+networks:
+  my-net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.0.0/16
+
+volumes:
+  mysql_data_volume:
