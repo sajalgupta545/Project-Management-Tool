@@ -8,7 +8,7 @@ services:
       - "3307:3306"
     restart: always
     networks: 
-      - springboot-mysql-net 
+      - my-net 
     environment:
       - MYSQL_ROOT_PASSWORD=sajal123
       - MYSQL_DATABASE=task
@@ -19,7 +19,6 @@ services:
     networks:
     	my-net:
     	  ipv4_address: 172.18.0.1
-    	    
   react:
     image: sajalgupta545/mytaskguru-frontend:latest
     container_name: client
@@ -49,15 +48,11 @@ services:
     	my-net:
     	  ipv4_address: 172.18.0.2 
     restart: on-failure
-  
-
-
 networks:
   my-net:
     ipam:
       driver: default
       config:
         - subnet: 172.18.0.0/16
-
 volumes:
   mysql_data_volume:
