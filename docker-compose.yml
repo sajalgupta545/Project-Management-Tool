@@ -7,8 +7,6 @@ services:
     ports:
       - "3307:3306"
     restart: always
-    networks: 
-      - my-net 
     environment:
       - MYSQL_ROOT_PASSWORD=sajal123
       - MYSQL_DATABASE=task
@@ -18,15 +16,15 @@ services:
       - mysql_data_volume:/var/lib/mysql
     networks:
     	my-net:
-    	  ipv4_address: 172.18.0.1
+    	 ipv4_address: 172.18.0.1
   react:
     image: sajalgupta545/mytaskguru-frontend:latest
     container_name: client
     ports:
       - "3000:3000"
     networks:
-    	my-net:
-    	  ipv4_address: 172.18.0.3
+     my-net:
+    	ipv4_address: 172.18.0.3
     depends_on:
       - springboot-restful-webservices
   springboot-restful-webservices:
@@ -45,8 +43,8 @@ services:
     depends_on:
       - mysqldb
     networks:
-    	my-net:
-    	  ipv4_address: 172.18.0.2 
+     my-net:
+      ipv4_address: 172.18.0.2 
     restart: on-failure
 networks:
   my-net:
