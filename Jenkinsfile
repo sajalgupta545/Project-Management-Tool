@@ -5,8 +5,8 @@ pipeline {
 
 		stage('Git Pull') {
 			steps {
-				git url: 'https://github.com/sajalgupta545/PPMTool.git',
-					branch: 'master'
+				git url: 'https://github.com/sajalgupta545/Project-Management-Tool.git',
+					branch: 'main'
             }
         }
 
