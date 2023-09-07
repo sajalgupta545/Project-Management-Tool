@@ -19,7 +19,7 @@ services:
       my-net:
         ipv4_address: 172.15.0.10
   react:
-    image: sajalgupta545/mytaskguru-frontend:latest
+    image: sajalgupta545/mytaskguru-frontend
     container_name: client
     ports:
       - "3000:3000"
@@ -29,7 +29,7 @@ services:
     depends_on:
       - springboot-restful-webservices
   springboot-restful-webservices:
-    image: sajalgupta545/mytaskguru-backend:latest
+    image: sajalgupta545/mytaskguru-backend
     container_name: springboot-restful-webservices
     build: 
       context: ./
