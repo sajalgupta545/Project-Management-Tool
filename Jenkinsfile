@@ -64,12 +64,7 @@ pipeline {
             }
         }
 
-			stage('Removing Docker Images from Local') {
-				steps {
-					sh "docker rmi sajalgupta545/mytaskguru-frontend:latest"
-					sh "docker rmi sajalgupta545/mytaskguru-backend:latest"
-            }
-        }
+
 		stage('Ansible Deploy') {
              steps {
                   ansiblePlaybook colorized: true, disableHostKeyChecking: true, installation: 'Ansible', inventory: 'inventory', playbook: 'ansible-playbook.yml'
