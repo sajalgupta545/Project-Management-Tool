@@ -1,0 +1,1 @@
+Before configuring first set up ngrok to expose your localhost 8080 jenkins to public ip then set up web-hook payload url with generating secret key and then configure jenkins also then would be able to use web-hooks
