@@ -8,5 +8,7 @@
         dest: ./
     - name: Pull the Docker images specifed in docker-compose
       command: docker-compose pull
+      async: 45
+      poll: 5
     - name: Running Docker Compose File
       command: docker-compose up -d
